@@ -1,0 +1,38 @@
+{
+  "name": "rave-build",
+  "version": "0.0.1",
+  "description": "A basic build extension for RaveJS projects.",
+  "main": "rave.js",
+  "rave": {
+    "extension": "rave.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rave",
+    "build"
+  ],
+  "authors": [
+    "John Hann (http://unscriptable.com)",
+    "Brian Cavalier (http://hovercraftstudios.com)"
+  ],
+  "contributors": [
+    {
+      "name": "John Hann",
+      "web": "http://unscriptable.com"
+    },
+    {
+      "name": "Brian Cavalier",
+      "web": "http://hovercraftstudios.com"
+    }
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "rave": "RaveJS/rave#master"
+  },
+  "dependencies": {
+    "cram": "^0.8.2",
+    "when": "~3.0"
+  }
+}
