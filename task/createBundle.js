@@ -4,19 +4,16 @@
 
 var context = require('../lib/context');
 var bundle = require('../lib/bundle');
+var loader = require('../lib/loader');
+var when = require('when');
 
 module.exports = createBundle;
 
 function createBundle (io, config) {
 	var ctx = context(io)(config);
 	var bndl = ctx.then(bundle(io));
-	// todo: add loader & promise shims in here, too
-	return Promise.all([ ctx, bndl ])
-		.then(serializeAll);
-}
-
-function serializeAll (things) {
-	return Promise.all(things.map(serializeOne))
+	var ldr = ctx.then(loader(io));
+	return when.map([ ldr, ctx, bndl ], serializeOne)
 		.then(function (serialized) {
 			return serialized.join('\n\n');
 		});

@@ -16,9 +16,9 @@ build(args);
 
 function build (args) {
 	// this is temporary
-	var context = eval('(' + args[0] + ')');
-	context.raveMeta = context.raveMeta.split(/\s*,\s*/).map(ensureAbsolute);
-	return createBundle(io, context)
+	var config = eval('(' + args[0] + ')');
+	config.raveMeta = config.raveMeta.split(/\s*,\s*/).map(ensureAbsolute);
+	return createBundle(io, config)
 		.then(out)
 		.catch(fail);
 }
