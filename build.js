@@ -10,6 +10,8 @@ global.Promise = require('when/es6-shim/Promise');
 // temporary:
 require('when/monitor');
 
+module.exports = build;
+
 var args = process.argv.slice(2);
 
 build(args);
@@ -18,24 +20,18 @@ function build (args) {
 	// this is temporary
 	var config = eval('(' + args[0] + ')');
 	config.raveMeta = config.raveMeta.split(/\s*,\s*/).map(ensureAbsolute);
+	config.baseUrl = process.cwd();
 	return createBundle(io, config)
 		.then(out)
 		.catch(fail);
 }
 
 function out (contents) {
-	return io.write('./bundle.js', contents);
+	return io.write('./boot.js', contents);
 }
 
 function fail (ex) {
 	throw ex;
-}
-
-function ensureRelative (url) {
-	if (!/^\.{1,2}\//.test(url)) {
-		url = './' + url;
-	}
-	return url;
 }
 
 function ensureAbsolute (url) {
