@@ -2,27 +2,31 @@
 /** @author Brian Cavalier */
 /** @author John Hann */
 
+var context = require('../lib/context');
+var path = require('path');
+
 module.exports = makeBootFile;
 
 var template = "(function(d,s){s=(d.head||d.getElementsByTagName('head')[0]).appendChild(d.createElement('script'));s.async=!1;s.src='{raveSource}';}(document));";
 
-function makeBootFile (io, context) {
-	if (context.isBuiltMode) {
-		return function () {
-			return "TODO: this should be the built application";
-		};
-	}
-	else {
-		return function () {
-			return createBootScript(io.join, context);
-		};
-	}
+function makeBootFile (io, config) {
+	var ctx = context(io)(config);
+	return ctx.then(function (context) {
+		return createBootScript(io, context);
+	});
 }
 
-function createBootScript (join, context) {
+function createBootScript (io, context) {
 	// 1. find where rave.js is
 	// 2. output a boot.js file that points to rave.js
 	var ravePkg = context.packages.rave;
-	var raveMain = join(ravePkg.location, ravePkg.main);
+	var raveMain = ensureExt('.js', io.join(ravePkg.location, ravePkg.main));
+	raveMain = io.relative(context.baseUrl, raveMain);
 	return template.replace(/\{raveSource\}/, raveMain);
+}
+
+function ensureExt (ext, name) {
+	return path.extname(name)
+		? name
+		: name + ext;
 }
