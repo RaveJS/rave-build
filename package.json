@@ -1,6 +1,6 @@
 {
   "name": "rave-build",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A basic build extension for RaveJS projects.",
   "main": "rave.js",
   "rave": {
@@ -29,7 +29,7 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "rave": "RaveJS/rave#master"
+    "rave": "^0.4.4"
   },
   "dependencies": {
     "cram": "^0.8.2",
