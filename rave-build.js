@@ -16,20 +16,14 @@ exports.unbuild = unbuild;
 
 function build (config) {
 	return createBundle(io, config)
-		.then(out)
-		.catch(fail);
+		.then(out);
 }
 
 function unbuild (config) {
 	return makeBootFile(io, config)
-		.then(out)
-		.catch(fail);
+		.then(out);
 }
 
 function out (contents) {
 	return io.write('./boot.js', contents);
-}
-
-function fail (ex) {
-	throw ex;
 }
