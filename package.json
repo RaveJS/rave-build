@@ -1,6 +1,6 @@
 {
   "name": "rave-build",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A basic build extension for RaveJS projects.",
   "main": "rave-build.js",
   "rave": {
